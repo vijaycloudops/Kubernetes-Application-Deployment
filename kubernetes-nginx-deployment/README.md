@@ -13,7 +13,7 @@ It showcases Kubernetes orchestration concepts, including multi-replica Deployme
 
 ## 🏗️ Kubernetes Architecture
 
-![Kubernetes Nginx Deployment Architecture](..images/kubernetes-architecture.png)
+![Kubernetes Nginx Deployment Architecture](../Images/kubernetes-architecture.png)
 
 The architecture demonstrates how Kubernetes manages two Nginx replicas inside a dedicated Namespace and exposes the application through a NodePort Service.
 
