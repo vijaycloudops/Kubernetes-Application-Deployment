@@ -1,6 +1,6 @@
 # Simple Kubernetes Nginx Deployment
 
-A beginner-friendly Kubernetes project that deploys an Nginx web server using Kubernetes manifests. It demonstrates namespaces, Deployments, Pods, Services, labels, resource requests/limits, and health probes.
+Kubernetes-based Nginx application deployment demonstrating container orchestration, multi-replica Deployments, Service discovery, Namespace isolation, resource management, and application health monitoring using Kubernetes YAML manifests.
 
 ## What this project creates
 
