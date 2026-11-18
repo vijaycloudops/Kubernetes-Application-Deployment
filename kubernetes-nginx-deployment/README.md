@@ -1,4 +1,4 @@
-# Simple Kubernetes Nginx Deployment
+# Kubernetes Nginx Deployment
 
 Kubernetes-based Nginx application deployment demonstrating container orchestration, multi-replica Deployments, Service discovery, Namespace isolation, resource management, and application health monitoring using Kubernetes YAML manifests.
 
