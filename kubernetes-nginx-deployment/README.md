@@ -1,170 +1,165 @@
-# Kubernetes Nginx Deployment
+# 🚀 Kubernetes Nginx Application Deployment
 
-Kubernetes-based Nginx application deployment demonstrating container orchestration, multi-replica Deployments, Service discovery, Namespace isolation, resource management, and application health monitoring using Kubernetes YAML manifests.
+![Kubernetes](https://img.shields.io/badge/Kubernetes-Orchestration-326CE5?logo=kubernetes&logoColor=white)
+![Docker](https://img.shields.io/badge/Container-Nginx-009639?logo=nginx&logoColor=white)
+![YAML](https://img.shields.io/badge/Configuration-YAML-red)
+![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Windows-blue)
 
-## What this project creates
+## 📌 Project Overview
 
-- A Kubernetes namespace named `nginx-demo`
-- A Deployment with 2 Nginx replicas
-- A NodePort Service to expose Nginx
-- CPU and memory requests/limits
-- Readiness and liveness probes
+This project demonstrates the deployment and management of a containerized Nginx application using Kubernetes.
 
-## Architecture
+It showcases Kubernetes orchestration concepts, including multi-replica Deployments, Service discovery, Namespace isolation, resource management, and application health monitoring.
 
-```text
-Your browser
-    |
-    | http://localhost:30080
-    v
-NodePort Service (nginx-service)
-    |
-    v
-Deployment (nginx-deployment)
-    |
-    +---- Pod 1: Nginx container
-    |
-    +---- Pod 2: Nginx container
-```
+## 🏗️ Kubernetes Architecture
 
-## Prerequisites (Windows 11)
+![Kubernetes Nginx Deployment Architecture](images/kubernetes-architecture.png)
 
-Choose one local Kubernetes environment:
+The architecture demonstrates how Kubernetes manages two Nginx replicas inside a dedicated Namespace and exposes the application through a NodePort Service.
 
-- Docker Desktop with Kubernetes enabled, or
-- Minikube with kubectl installed.
+## 🛠️ Technologies Used
 
-Check that kubectl can reach your cluster:
+- Kubernetes
+- Docker
+- Nginx
+- YAML
+- kubectl
+- Linux
+- Windows 11
 
-```powershell
-kubectl version --client
-kubectl get nodes
-```
+## ⚙️ Key Features
 
-## Project structure
+- **Namespace Isolation:** Uses a dedicated Namespace named `nginx-demo`.
+- **Deployment Management:** Deploys Nginx with two replicas.
+- **Service Discovery:** Exposes the application using a NodePort Service.
+- **Health Monitoring:** Configures readiness and liveness probes.
+- **Resource Management:** Defines CPU and memory requests and limits.
+- **Container Orchestration:** Uses Kubernetes to manage application Pods.
+
+## 📂 Project Structure
 
 ```text
 kubernetes-nginx-deployment/
-├── k8s/
-│   ├── namespace.yaml
-│   ├── deployment.yaml
-│   └── service.yaml
-├── .gitignore
-└── README.md
+│
+├── README.md
+├── images/
+│   └── kubernetes-architecture.png
+│
+└── k8s/
+    ├── namespace.yaml
+    ├── deployment.yaml
+    └── service.yaml
 ```
 
-## Deploy the application
+## 🚀 Deployment Instructions
 
-Run these commands from the project root in PowerShell.
+### 1. Prerequisites
 
-### 1. Create the namespace
+Install and configure:
 
-```powershell
+- Docker Desktop with Kubernetes enabled, or Minikube
+- kubectl
+
+Verify Kubernetes connectivity:
+
+```bash
+kubectl cluster-info
+```
+
+### 2. Clone the Repository
+
+```bash
+git clone https://github.com/vijaycloudops/kubernetes-nginx-deployment.git
+```
+
+```bash
+cd kubernetes-nginx-deployment
+```
+
+### 3. Deploy Kubernetes Resources
+
+Apply the Namespace:
+
+```bash
 kubectl apply -f k8s/namespace.yaml
 ```
 
-### 2. Deploy Nginx
+Apply the Deployment:
 
-```powershell
+```bash
 kubectl apply -f k8s/deployment.yaml
 ```
 
-### 3. Expose Nginx using a NodePort Service
+Apply the Service:
 
-```powershell
+```bash
 kubectl apply -f k8s/service.yaml
 ```
 
-### 4. Check Kubernetes resources
+### 4. Verify Deployment
 
-```powershell
-kubectl get namespaces
-kubectl get deployments -n nginx-demo
+Check Pods:
+
+```bash
 kubectl get pods -n nginx-demo
+```
+
+Check Deployment:
+
+```bash
+kubectl get deployments -n nginx-demo
+```
+
+Check Services:
+
+```bash
 kubectl get services -n nginx-demo
 ```
 
-Wait until both Pods show `Running` and `READY` as `1/1`.
+### 5. Access the Nginx Application
 
-### 5. Open the application
-
-For Docker Desktop Kubernetes, open:
+For Docker Desktop Kubernetes or a suitable local cluster configuration, open:
 
 ```text
 http://localhost:30080
 ```
 
-For Minikube, run:
+Alternatively, use port forwarding:
 
-```powershell
-minikube service nginx-service -n nginx-demo
-```
-
-If the NodePort URL does not open in your environment, use port-forwarding:
-
-```powershell
+```bash
 kubectl port-forward service/nginx-service 8080:80 -n nginx-demo
 ```
 
-Then open `http://localhost:8080`.
+Then open:
 
-## Useful troubleshooting commands
-
-```powershell
-kubectl describe pods -n nginx-demo
-kubectl logs deployment/nginx-deployment -n nginx-demo
-kubectl get events -n nginx-demo --sort-by=.metadata.creationTimestamp
+```text
+http://localhost:8080
 ```
 
-## Update and scale
+## 🧹 Cleanup
 
-Change the replica count:
+Remove all project resources:
 
-```powershell
-kubectl scale deployment nginx-deployment --replicas=3 -n nginx-demo
-kubectl get pods -n nginx-demo
-```
-
-Roll out the latest declared configuration:
-
-```powershell
-kubectl rollout status deployment/nginx-deployment -n nginx-demo
-kubectl rollout history deployment/nginx-deployment -n nginx-demo
-```
-
-## Clean up
-
-Delete all project resources:
-
-```powershell
+```bash
 kubectl delete namespace nginx-demo
 ```
 
-## Interview explanation
+## 🎯 Skills Demonstrated
 
-"I created a simple Kubernetes application deployment using YAML manifests. I created a namespace to isolate the project resources, a Deployment to maintain two Nginx replicas, and a NodePort Service to expose the application. I configured resource requests and limits along with readiness and liveness probes. I used kubectl to deploy, inspect, scale, troubleshoot, and clean up the application."
+- Kubernetes application deployment
+- Container orchestration
+- Kubernetes Services and networking
+- Namespace management
+- Application health checks
+- Resource requests and limits
+- Infrastructure troubleshooting
 
-## Concepts demonstrated
+## 👨‍💻 Author
 
-| Kubernetes concept | Purpose |
-|---|---|
-| Namespace | Logical isolation for project resources |
-| Pod | Runs the Nginx container |
-| Deployment | Maintains the desired number of Pods |
-| Replica count | Runs two application replicas |
-| Service | Provides stable access to Pods |
-| NodePort | Exposes the Service on a node port |
-| Requests and limits | Define container resource requirements and caps |
-| Readiness probe | Checks whether the container is ready for traffic |
-| Liveness probe | Checks whether the container should be restarted |
+**Vijay Kumar Kunja**
 
-## Next improvements
+GitHub: [vijaycloudops](https://github.com/vijaycloudops)
 
-- Build a custom Docker image and deploy it.
-- Add ConfigMaps and Secrets.
-- Add Ingress with a local ingress controller.
-- Package the application using Helm.
-- Add CI/CD using GitHub Actions.
-- Deploy the same manifests to a managed Kubernetes service such as AKS or EKS.
+---
 
-This is a learning project. It uses the public Nginx image and is not intended as a production deployment.
+⭐ If you find this project useful, feel free to explore the repository and its Kubernetes manifests.
